@@ -8,8 +8,10 @@ import net.minecraft.server.MinecraftServer;
 import org.cneko.ctlib.common.util.meta.PluginMeta;
 import org.jetbrains.annotations.NotNull;
 import net.minecraft.server.dedicated.DedicatedServerProperties;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Optional;
@@ -99,15 +101,18 @@ public class SudoMeta implements PluginMeta{
         public ServerInfo(MinecraftServer server) {
             this.server = server;
         }
+        @Nullable
         public DedicatedServerProperties getProperties() {
             // 服务器配置文件路径
             Path propertiesFilePath = Path.of("server.properties");
+            if(!Files.exists(propertiesFilePath)) return null;
             // 通过文件路径创建 DedicatedServerProperties 对象
             DedicatedServerProperties serverProperties = DedicatedServerProperties.fromFile(propertiesFilePath);
             return serverProperties;
         }
         @Override
         public boolean isOnlineMode() {
+            if(getProperties()==null) return true;
             return getProperties().onlineMode;
         }
 
@@ -119,11 +124,13 @@ public class SudoMeta implements PluginMeta{
 
         @Override
         public String getName() {
+            if(getProperties()==null) return "server";
             return getProperties().levelName;
         }
 
         @Override
         public String getMotd() {
+            if(getProperties()==null) return "server";
             return getProperties().motd;
         }
 

@@ -4,9 +4,12 @@ import net.minecraft.world.entity.player.Player;
 import org.cneko.ctlib.common.file.JsonConfiguration;
 import org.cneko.sudo.util.DataUtil;
 import org.cneko.sudo.util.TextUtil;
+import org.cneko.sudo.util.ctlib.Json;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SudoPlayer {
@@ -32,7 +35,13 @@ public class SudoPlayer {
      */
     public static void setSudo(Player player, boolean canSudo){
         String name = TextUtil.getPlayerName(player);
-        sudoPlayers.put(name, canSudo);
+        if(!canSudo){
+            if(sudoPlayers.containsKey(name)){
+                sudoPlayers.remove(player);
+            }
+        }else {
+            sudoPlayers.put(name, canSudo);
+        }
     }
 
     /**
@@ -44,7 +53,7 @@ public class SudoPlayer {
     public static boolean isSudoPlayer(Player player){
         // 获取数据文件
         JsonConfiguration data = DataUtil.getDataFile(player);
-        return data.getBoolean("sudo.enable", false);
+        return new Json(data.toString()).getBoolean("sudo.enable", false);
     }
 
     /**
@@ -54,6 +63,33 @@ public class SudoPlayer {
     public static void setSudoPlayer(Player player){
         // 设置默认值
         DataUtil.setDefaultValue(player);
+        JsonConfiguration data = DataUtil.getDataFile(player);
+        // 设置为true
+        data.set("sudo.enable", true);
+        // 设置等级
+        data.set("sudo.level", 4);
+        try {
+            data.save();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * 取消玩家的sudo权限
+     * @param player 玩家
+     */
+    public static void unsetSudoPlayer(Player player){
+        // 获取数据文件
+        JsonConfiguration data = DataUtil.getDataFile(player);
+        // 设置为false
+        data.set("sudo.enable", false);
+        data.set("sudo.level", 1);
+        try {
+            data.save();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -106,5 +142,13 @@ public class SudoPlayer {
         JsonConfiguration data = DataUtil.getDataFile(player);
         // 使用sha256加密
         return data.getString("sudo.password").equals(DataUtil.sha256(password));
+    }
+
+    /**
+     * 获取当前会话中的sudo玩家
+     * @return 玩家
+     */
+    public static List<String> getSudoPlayers(){
+        return new ArrayList<String>(sudoPlayers.keySet());
     }
 }

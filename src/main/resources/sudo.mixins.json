@@ -1,9 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.cneko.sudo.mixin",
+  "package": "org.cneko.sudo.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "DeOpCommandsMixin",
+    "OpCommandMixin",
+    "ServerOpListMixin"
   ],
   "client": [
   ],

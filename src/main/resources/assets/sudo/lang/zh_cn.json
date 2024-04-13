@@ -1,3 +1,4 @@
 {
-  "command.sudo.option.i.auth.failed":"§c身份验证失败!"
+  "command.sudo.option.i.auth.failed":"§c身份验证失败!",
+  "command.sudo.auth.failed": "§c权限不够"
 }
