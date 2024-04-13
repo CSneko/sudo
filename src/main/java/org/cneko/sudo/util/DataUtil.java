@@ -1,0 +1,57 @@
+package org.cneko.sudo.util;
+
+import net.minecraft.world.entity.player.Player;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.cneko.ctlib.common.file.JsonConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class DataUtil {
+    public static @Nullable JsonConfiguration getDataFile(Player player){
+        createDataFile(player);
+        // 获取文件
+        String folder = getDataFilePath(player)+"/data.json";
+        Path path = Path.of(folder);
+        try {
+            return new JsonConfiguration(path);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    public static String getDataFilePath(Player player){
+        return "sudo/home/"+TextUtil.getPlayerName(player);
+    }
+    public static void createDataFile(Player player){
+        String folder = getDataFilePath(player) + "/data.json";
+        Path path = Path.of(folder);
+        if(!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+    public static void setDefaultValue(Player player){
+        createDataFile(player);
+        JsonConfiguration data = getDataFile(player);
+        if (data == null) return;
+        data.set("sudo.level", 0);
+        data.set("sudo.enable", false);
+        data.set("sudo.password", "");
+        try {
+            data.save();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static String sha256(@NotNull String str){
+        return DigestUtils.sha256Hex(str);
+    }
+}
