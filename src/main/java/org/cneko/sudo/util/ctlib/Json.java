@@ -163,13 +163,13 @@ public class Json {
         }
     }
 
-    public ArrayList<JsonConfiguration> getJsonList(String key) {
+    public ArrayList<Json> getJsonList(String key) {
         Object value = get(key);
         if (value instanceof List) {
-            ArrayList<JsonConfiguration> list = new ArrayList<>();
+            ArrayList<Json> list = new ArrayList<>();
             for (Object obj : (List<?>) value) {
                 if (obj instanceof Map) {
-                    list.add(new JsonConfiguration(new Gson().toJson(obj)));
+                    list.add(new Json(new Gson().toJson(obj)));
                 }
             }
             return list;
@@ -191,10 +191,10 @@ public class Json {
         return get(key) != null;
     }
 
-    public JsonConfiguration getJsonConfiguration(String key) {
+    public Json getJsonConfiguration(String key) {
         Object value = get(key);
         if (value instanceof Map) {
-            return new JsonConfiguration(new Gson().toJson(value));
+            return new Json(new Gson().toJson(value));
         } else {
             return null;
         }

@@ -23,6 +23,10 @@ public class PlayerConnectionEvents {
         }
         // 设置环境变量
         CommandOutput.setExport(player,"join_time", String.valueOf(System.currentTimeMillis()/1000));
+        CommandOutput.setExport(player,"join_x", String.valueOf(player.getX()));
+        CommandOutput.setExport(player,"join_y", String.valueOf(player.getY()));
+        CommandOutput.setExport(player,"join_z", String.valueOf(player.getZ()));
+        CommandOutput.setExport(player,"ip", player.getIpAddress());
     }
 
     private static void onPlayerLeave(ServerGamePacketListenerImpl handler, MinecraftServer server) {
