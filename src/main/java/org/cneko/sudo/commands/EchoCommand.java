@@ -9,6 +9,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import org.cneko.sudo.api.CommandOutput;
+import org.cneko.sudo.util.FileUtil;
 
 import static net.minecraft.commands.Commands.literal;
 import static net.minecraft.commands.Commands.argument;
@@ -32,7 +33,7 @@ public class EchoCommand {
         String message = StringArgumentType.getString(context, "message");
         String input = context.getInput();
         CommandOutput.sendCommand(player,input);
-        CommandOutput.sendCommandOutput(player,message);
+        CommandOutput.sendCommandOutput(player,message,input);
         return 1;
     }
 }

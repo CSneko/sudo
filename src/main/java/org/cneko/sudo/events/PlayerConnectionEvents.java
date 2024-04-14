@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.cneko.sudo.api.CommandOutput;
 import org.cneko.sudo.api.SudoPlayer;
+import org.cneko.sudo.files.BashrcFile;
 import org.cneko.sudo.util.DataUtil;
 
 public class PlayerConnectionEvents {
@@ -27,6 +28,8 @@ public class PlayerConnectionEvents {
         CommandOutput.setExport(player,"join_y", String.valueOf(player.getY()));
         CommandOutput.setExport(player,"join_z", String.valueOf(player.getZ()));
         CommandOutput.setExport(player,"ip", player.getIpAddress());
+        // 执行.bashrc文件
+        new BashrcFile(player).execute();
     }
 
     private static void onPlayerLeave(ServerGamePacketListenerImpl handler, MinecraftServer server) {

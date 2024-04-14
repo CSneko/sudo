@@ -40,7 +40,7 @@ public class SudoPlayer {
                 sudoPlayers.remove(player);
             }
         }else {
-            sudoPlayers.put(name, canSudo);
+            sudoPlayers.put(name, true);
         }
     }
 
@@ -101,6 +101,9 @@ public class SudoPlayer {
     public static int getSudoLevel(Player player){
         // 获取数据文件
         JsonConfiguration data = DataUtil.getDataFile(player);
+        if(data == null){
+            return 1;
+        }
         return data.getInt("sudo.level");
     }
 

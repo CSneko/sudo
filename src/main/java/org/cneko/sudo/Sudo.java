@@ -2,6 +2,7 @@ package org.cneko.sudo;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import org.cneko.sudo.commands.CatCommand;
 import org.cneko.sudo.commands.EchoCommand;
 import org.cneko.sudo.commands.ExportCommand;
 import org.cneko.sudo.commands.SudoCommand;
@@ -17,6 +18,7 @@ public class Sudo implements ModInitializer {
         SudoCommand.init();
         EchoCommand.init();
         ExportCommand.init();
+        CatCommand.init();
         // 注册服务器启动事件监听器
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             META.setMinecraftServer(server);
