@@ -46,7 +46,7 @@ public class CatCommand {
             return -1;
         }
         // 如果文件路径不在自己的目录下且不是sudo玩家，则发送错误消息
-        if(!file.startsWith(PlayerBase.getHome(player))&&!canVisitOthers){
+        if(!file.startsWith("/"+PlayerBase.getHome(player))&&!canVisitOthers){
             CommandOutput.sendCommandFeedbackToPlayer(player,"command.sudo.auth.failed");
             return -1;
         }

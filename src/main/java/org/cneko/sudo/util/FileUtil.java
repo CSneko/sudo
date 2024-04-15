@@ -1,6 +1,11 @@
 package org.cneko.sudo.util;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 public class FileUtil {
     // 读取文件内容
@@ -44,5 +49,52 @@ public class FileUtil {
     public static boolean isFileExists(String filePath) {
         java.io.File file = new java.io.File(filePath);
         return file.exists();
+    }
+
+    // 获取文件夹下的所有文件
+    public static List<String> getAllFileInDic(String directoryPath) {
+        // 创建一个List存储数据
+        List<String> list = new ArrayList<>();
+
+        // 创建一个File对象，表示要遍历的目录
+        File directory = new File(directoryPath);
+
+        // 创建一个队列来存储待遍历的文件和目录
+        Queue<File> queue = new ArrayDeque<>();
+        queue.offer(directory);
+
+        // 循环遍历队列中的文件和目录
+        while (!queue.isEmpty()) {
+            File file = queue.poll();
+
+            // 检查文件是否存在
+            if (file.exists()) {
+                // 检查文件是否是目录
+                if (file.isDirectory()) {
+                    // 获取目录下的所有文件和子目录
+                    File[] files = file.listFiles();
+                    // 将子文件和子目录添加到队列中
+                    for (File subFile : files) {
+                        queue.offer(subFile);
+                    }
+                } else {
+                    // 获取相对路径
+                    String relativePath = getRelativePath(directory, file);
+                    list.add(relativePath);
+                }
+            }
+        }
+        return list;
+    }
+
+    // 获取文件相对于目录的相对路径
+    private static String getRelativePath(File directory, File file) {
+        String directoryPath = directory.getPath();
+        String filePath = file.getPath();
+        if (filePath.startsWith(directoryPath)) {
+            return filePath.substring(directoryPath.length() + 1);
+        } else {
+            return filePath;
+        }
     }
 }

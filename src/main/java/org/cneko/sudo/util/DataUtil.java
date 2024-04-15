@@ -24,7 +24,7 @@ public class DataUtil {
         }
     }
     public static String getDataFilePath(Player player){
-        return "sudo/home/"+TextUtil.getPlayerName(player);
+        return "home/"+TextUtil.getPlayerName(player);
     }
 public static void createDataFile(Player player) {
     String filePath = getDataFilePath(player) + "/data.json";
