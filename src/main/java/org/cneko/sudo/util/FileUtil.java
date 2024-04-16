@@ -97,4 +97,14 @@ public class FileUtil {
             return filePath;
         }
     }
+
+    // 获取真正的文件路径
+    public static String getRealFilePath(String filePath) {
+        // 如果是以/home开头的，则去掉/
+        if (filePath.startsWith("/home")) {
+            return filePath.substring(1);
+        } else {
+            return filePath;
+        }
+    }
 }

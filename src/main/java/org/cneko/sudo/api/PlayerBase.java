@@ -9,8 +9,11 @@ public class PlayerBase {
         return "home/"+name;
     }
     public static boolean playerCanWriteFile(Player player,String filePath){
-        boolean can = filePath.startsWith("/"+getHome(player));
-        can = SudoPlayer.canSudo(player) && SudoPlayer.getSudoLevel(player) >=4;
-        return can;
+        return  !filePath.contains("data.json") &&
+                (filePath.startsWith("/" + getHome(player))
+                    || (SudoPlayer.canSudo(player)
+                        && SudoPlayer.getSudoLevel(player) >= 4)
+                );
+
     }
 }
