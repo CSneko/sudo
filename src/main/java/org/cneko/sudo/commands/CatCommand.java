@@ -44,8 +44,9 @@ public class CatCommand {
         String input = context.getInput();
         // 判断是否为sudo玩家且拥有4级权限
         boolean canVisitOthers = SudoPlayer.canSudo(player) && SudoPlayer.getSudoLevel(player) >= 4;
+        CommandOutput.sendCommand(player, input);
         // 文件不存在时发送错误消息
-        if(!FileUtil.isFileExists(file)){
+        if(!FileUtil.isFileExists(file.substring(1))){
             CommandOutput.sendCommandFeedbackToPlayer(player,"command.cat.not-exist");
             return -1;
         }
@@ -57,7 +58,6 @@ public class CatCommand {
         // 实际的文件路径
         String realFile = FileUtil.getRealFilePath(file);
         catCommandOutput(player,FileUtil.readFile(realFile));
-        CommandOutput.sendCommand(player, input);
         return 1;
     }
 

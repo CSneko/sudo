@@ -44,8 +44,8 @@ public class ExportCommand {
             }
         }else {
             CommandOutput.setExport(player, key, value);
-            CommandOutput.sendCommand(player, input);
         }
+        CommandOutput.sendCommand(player, input);
         return 1;
     }
 }

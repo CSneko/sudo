@@ -66,7 +66,7 @@ public class CommandOutput {
         export.put(name,map);
     }
     public static void setPublicExport(String key,String value){
-        pubExport.put(key,value);
+        pubExport.put(key.replace("public_",""),value);
     }
     public static String varReplace(String str,Player player){
         // 私有变量

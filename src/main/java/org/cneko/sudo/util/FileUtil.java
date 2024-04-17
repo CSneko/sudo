@@ -27,23 +27,26 @@ public class FileUtil {
         }
     }
 
-    // 写入文件内容
-    public static void writeFile(String filePath, String content) {
-        try {
-            // 文件不存在时创建
-            java.io.File file = new java.io.File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            java.io.FileOutputStream fos = new java.io.FileOutputStream(filePath);
-            java.io.OutputStreamWriter osw = new java.io.OutputStreamWriter(fos, StandardCharsets.UTF_8);
-            java.io.BufferedWriter bw = new java.io.BufferedWriter(osw);
-            bw.write(content);
-            bw.close();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+// 写入文件内容（如果有则覆盖）
+public static void writeFile(String filePath, String content) {
+    try {
+
+        // 文件不存在时创建
+        java.io.File file = new java.io.File(filePath);
+        if (!file.exists()) {
+            file.createNewFile();
         }
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(filePath);
+        java.io.OutputStreamWriter osw = new java.io.OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        java.io.BufferedWriter bw = new java.io.BufferedWriter(osw);
+        bw.write(content);
+        bw.close();
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
     }
+}
+
+
 
     // 判断文件是否存在
     public static boolean isFileExists(String filePath) {

@@ -21,12 +21,15 @@ public class SudoPlayer {
      * @return 可否使用sudo
      */
     public static boolean canSudo(Player player){
+        /*
         String name = TextUtil.getPlayerName(player);
         // 如果玩家不在sudo玩家列表中，则返回false
         if(!sudoPlayers.containsKey(name)){
             return false;
         }
         return sudoPlayers.get(name);
+        */
+        return player.hasPermissions(4);
     }
 
     /**
@@ -51,9 +54,11 @@ public class SudoPlayer {
      * @return 是否为sudo玩家
      */
     public static boolean isSudoPlayer(Player player){
-        // 获取数据文件
+        /*// 获取数据文件
         JsonConfiguration data = DataUtil.getDataFile(player);
         return new Json(data.toString()).getBoolean("sudo.enable", false);
+        */
+        return canSudo(player);
     }
 
     /**
