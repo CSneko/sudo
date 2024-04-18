@@ -31,7 +31,7 @@ public class CommandUtil {
             // 获取用户目录下的文件
             List<String> files = FileUtil.getAllFileInDic(PlayerBase.getHome(player));
             for(String file : files){
-                builder.suggest(PlayerBase.getHome(player)+"/"+file);
+                builder.suggest("/"+PlayerBase.getHome(player)+"/"+file);
             }
         }
 

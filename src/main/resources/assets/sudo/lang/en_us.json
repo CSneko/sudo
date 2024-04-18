@@ -1,5 +1,6 @@
 {
   "command.sudo.option.i.auth.failed":"§cAuthentication failed!",
   "command.sudo.auth.failed": "§cYou don't have permission!",
-  "command.cat.not-exist": "§cThe file not exists!"
+  "command.cat.not-exist": "§cThe file not exists!",
+  "command.apt.network.error": "§cNetwork rrror!"
 }
