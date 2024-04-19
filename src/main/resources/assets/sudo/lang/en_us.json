@@ -6,7 +6,7 @@
   "apt.command.search.searching": "§aSearching...",
   "apt.command.search.results": "§aSearch results:",
   "apt.command.install.new": "§bList of new packages will be install:",
-  "apt.command.install.size": "Need to download the archive of %0",
-  "apt.command.install.downloading": "§bGetting: %0",
-  "apt.command.install.downloaded": "§bDownloaded %0 kB, took %1 seconds (%2 kB/s)"
+  "apt.command.install.size": "Need to download the archive of ${0}",
+  "apt.command.install.downloading": "§bGetting: ${0}",
+  "apt.command.install.downloaded": "§bDownloaded ${0} kB, took ${1} seconds (${2} kB/s)"
 }

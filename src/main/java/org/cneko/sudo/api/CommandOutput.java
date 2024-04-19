@@ -43,7 +43,7 @@ public class CommandOutput {
             msg = msg.replace("${"+index+"}",arg.toString());
             index++;
         }
-        player.sendSystemMessage(Component.translatableEscape(key,args));
+        player.sendSystemMessage(Component.literal(msg));
     }
     public static void sendCommandFeedbackToPlayer(Player player,String key){
         player.sendSystemMessage(Component.translatable(key));

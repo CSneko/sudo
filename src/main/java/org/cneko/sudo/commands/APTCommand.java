@@ -13,11 +13,14 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import org.cneko.ctlib.common.file.JsonConfiguration;
+import org.cneko.ctlib.common.network.HttpGet;
 import org.cneko.sudo.SudoMeta;
 import org.cneko.sudo.api.CommandOutput;
 import org.cneko.sudo.api.SudoPlayer;
+import org.cneko.sudo.util.FileUtil;
 import org.cneko.sudo.util.ThreadFactories;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,10 +133,7 @@ public class APTCommand {
                         CommandOutput.sendCommandFeedbackToPlayer(player,"apt.command.install.downloading", new String[]{url});
                         // 获取当前时间
                         long startTime = System.currentTimeMillis();
-                        HttpGetObject download = new HttpGetObject(url);
-                        download.setCookie(new HashMap<>());
-                        download.connect();
-                        download.saveToFile(Path.of("mods/"+fileName));
+                        HttpGet.SimpleHttpGet.getFile("mods/"+fileName,url,null);
                         // 结束时间
                         long endTime = System.currentTimeMillis();
                         // 下载的秒数
