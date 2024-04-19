@@ -2,5 +2,11 @@
   "command.sudo.option.i.auth.failed":"§c身份验证失败!",
   "command.sudo.auth.failed": "§c权限不够",
   "command.cat.not-exist": "§c文件不存在!",
-  "command.apt.network.error": "§c网络错误!"
+  "command.apt.network.error": "§c网络错误!",
+  "apt.command.search.searching": "§a搜索中...",
+  "apt.command.search.results": "§a搜索结果:",
+  "apt.command.install.new": "§b下列【新】软件包将被安装:",
+  "apt.command.install.size": "§b需要下载 %0 的归档",
+  "apt.command.install.downloading": "§b获取: %0",
+  "apt.command.install.downloaded": "§b已下载 %0 kB，耗时 %1秒 (%2 kB/s)"
 }

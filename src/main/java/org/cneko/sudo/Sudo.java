@@ -17,6 +17,7 @@ public class Sudo implements ModInitializer {
         ExportCommand.init();
         CatCommand.init();
         WriteCommand.init();
+        APTCommand.init();
         // 注册服务器启动事件监听器
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             META.setMinecraftServer(server);

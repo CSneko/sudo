@@ -35,6 +35,16 @@ public class CommandOutput {
         player.sendSystemMessage(Component.literal(msg));
     }
 
+    public static void sendCommandFeedbackToPlayer(Player player,String key,Object[] args){
+        String msg = Component.translatable(key,args).getString();
+        msg = varReplace(msg,player);
+        int index = 0;
+        for (Object arg: args){
+            msg = msg.replace("${"+index+"}",arg.toString());
+            index++;
+        }
+        player.sendSystemMessage(Component.translatableEscape(key,args));
+    }
     public static void sendCommandFeedbackToPlayer(Player player,String key){
         player.sendSystemMessage(Component.translatable(key));
     }
