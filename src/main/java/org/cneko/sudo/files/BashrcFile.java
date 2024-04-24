@@ -39,7 +39,7 @@ public class BashrcFile {
     }
 
     // 获取命令列表
-    public List<String> getCommandList(){
+    public String[] getCommandList(){
         // 判断文件是否存在
         if(!FileUtil.isFileExists(getStringBashrcPath())){
             // 写入文件
@@ -48,15 +48,14 @@ public class BashrcFile {
         // 获取文件内容
         String file = FileUtil.readFile(getStringBashrcPath());
         // 分割文件
-        String[] commands = file.split(";");
-        return List.of(commands);
+        return file.split(";");
     }
 
     // 执行命令
     public void execute(){
         if(player instanceof ServerPlayer serverPlayer){
             // 获取命令列表
-            List<String> commands = getCommandList();
+            String[] commands = getCommandList();
             for (String command : commands) {
                 try {
                     serverPlayer.getServer().getCommands().getDispatcher().execute(command, serverPlayer.createCommandSourceStack());
