@@ -1,4 +1,4 @@
-## Sudo
+## McSudo
 这个模组在游戏中添加了一些常用了Linux命令，包括`sudo`,`echo`,`cat`,`export`。
 
 同样也添加了一些Linux的机制，如`home`文件夹,`.bashrc`文件。
