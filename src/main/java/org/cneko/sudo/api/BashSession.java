@@ -1,6 +1,7 @@
 package org.cneko.sudo.api;
 
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,7 +29,7 @@ public class BashSession {
     }
 
     /**
-     * 执行给定的bash命令，并将输出追加到全局字符串变量。
+     * 执行给定的bash命令，并在每输出一条信息时调用output(String)方法。
      *
      * @param command 要执行的bash命令字符串
      * @throws Exception 如果命令执行过程中发生错误
@@ -45,9 +46,25 @@ public class BashSession {
             errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
         }
 
-        // 读取并追加标准输出和错误输出到全局字符串变量
-        readAndAppend(outputReader, globalOutput);
-        readAndAppend(errorReader, globalOutput);
+        // 读取并实时处理标准输出和错误输出
+        handleOutput(outputReader);
+        handleError(errorReader);
+    }
+
+    private void handleOutput(BufferedReader reader) throws Exception {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output(line); // 实时输出当前行
+            globalOutput.append(line).append(System.lineSeparator()); // 追加到全局字符串变量
+        }
+    }
+
+    private void handleError(BufferedReader reader) throws Exception {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output(line); // 实时输出当前行
+            globalOutput.append(line).append(System.lineSeparator()); // 追加到全局字符串变量
+        }
     }
 
     /**
@@ -85,6 +102,10 @@ public class BashSession {
         while ((line = reader.readLine()) != null) {
             target.append(line).append(System.lineSeparator());
         }
+    }
+
+    private void output(String message){
+        source.sendSystemMessage(Component.literal(message));
     }
 
 }

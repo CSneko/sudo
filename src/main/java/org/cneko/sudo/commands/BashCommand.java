@@ -45,9 +45,8 @@ public class BashCommand {
             BashSession session = new BashSession(context.getSource());
                 CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                     try{
-                    session.execute(command);
-                    CommandOutput.sendCommandOutput(player,session.getGlobalLog());
-                    session.close();
+                        session.execute(command);
+                        session.close();
                     }catch (Exception e){
                         CommandOutput.sendCommandOutput(player,"§cError: "+e.getMessage());
                     }
