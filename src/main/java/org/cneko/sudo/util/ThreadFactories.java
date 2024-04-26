@@ -20,4 +20,18 @@ public class ThreadFactories{
             return t;
         }
     }
+    public static class BashThreadFactory implements ThreadFactory {
+        private final String namePrefix;
+        private final AtomicInteger count = new AtomicInteger(1);
+
+        public BashThreadFactory() {
+            this.namePrefix = "Bash Thread";
+        }
+
+        @Override
+        public Thread newThread(@NotNull Runnable r) {
+            Thread t = new Thread(r, namePrefix + "-pool-" + count.getAndIncrement());
+            return t;
+        }
+    }
 }
