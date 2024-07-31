@@ -3,6 +3,7 @@
   "command.sudo.auth.failed": "§cYou don't have permission!",
   "command.cat.not-exist": "§cThe file not exists!",
   "command.apt.network.error": "§cNetwork Error!",
+  "command.neofetch": "${0}",
   "apt.command.search.searching": "§aSearching...",
   "apt.command.search.results": "§aSearch results:",
   "apt.command.install.new": "§bList of new packages will be install:",

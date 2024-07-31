@@ -110,7 +110,8 @@ public class CommandOutput {
                 .replace("${exp}",String.valueOf(player.experienceProgress))
                 .replace("${home}",PlayerBase.getHome(player));
         //其它
-        str = str.replace("${c}","§");
+        str = str.replace("${c}","§")
+                .replace("${os}","Minecraft");
         return str;
     }
 }

@@ -60,7 +60,7 @@ public static void createDataFile(Player player) {
         data.set("sudo.password", sha256("null"));
         try {
             data.save();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

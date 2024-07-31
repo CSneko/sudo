@@ -4,7 +4,6 @@ import net.minecraft.world.entity.player.Player;
 import org.cneko.ctlib.common.file.JsonConfiguration;
 import org.cneko.sudo.util.DataUtil;
 import org.cneko.sudo.util.TextUtil;
-import org.cneko.sudo.util.ctlib.Json;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class SudoPlayer {
         data.set("sudo.level", 4);
         try {
             data.save();
-        }catch (IOException e){
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
@@ -92,7 +91,7 @@ public class SudoPlayer {
         data.set("sudo.level", 1);
         try {
             data.save();
-        }catch (IOException e){
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
@@ -124,7 +123,7 @@ public class SudoPlayer {
         data.set("sudo.level", level);
         try {
             data.save();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
