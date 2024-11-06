@@ -32,7 +32,7 @@ public class CommandOutput {
         msg = varReplace(msg,player);
 
         // 发送消息
-        player.sendSystemMessage(Component.literal(msg));
+        player.displayClientMessage(Component.literal(msg),false);
     }
 
     public static void sendCommandFeedbackToPlayer(Player player,String key,Object[] args){
@@ -43,13 +43,13 @@ public class CommandOutput {
             msg = msg.replace("${"+index+"}",arg.toString());
             index++;
         }
-        player.sendSystemMessage(Component.literal(msg));
+        player.displayClientMessage(Component.literal(msg),false);
     }
     public static void sendCommandFeedbackToPlayer(Player player,String key){
-        player.sendSystemMessage(Component.translatable(key));
+        player.displayClientMessage(Component.translatable(key),false);
     }
     public static void sendCommandOutput(Player player,String message){
-        player.sendSystemMessage(Component.literal(varReplace(message,player)));
+        player.displayClientMessage(Component.literal(varReplace(message,player)),false);
     }
     public static void sendCommandOutput(Player player,String message,String command){
         if(StringUtil.checkFormat(command,"${any} >> ${any}")){
@@ -63,7 +63,7 @@ public class CommandOutput {
                 FileUtil.writeFile(file, message);
             }
         }
-        player.sendSystemMessage(Component.literal(varReplace(message,player)));
+        player.displayClientMessage(Component.literal(varReplace(message,player)),false);
     }
 
     public static void setExport(Player player,String key,String value){
